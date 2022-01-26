@@ -1,6 +1,11 @@
 # Store 4 - KMP
 ## ⚠️Work in progress⚠️ KMP implementation of the Store4 library
 
+### In case you encounter any "pod install" errors while building the sample app and you already checked what Android Studio suggest , run once:
+
+```groovy
+ ./gradlew :shared:podInstall
+ ```
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.dropbox.mobile.store/store4/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.dropbox.mobile.store/store4/)
 
