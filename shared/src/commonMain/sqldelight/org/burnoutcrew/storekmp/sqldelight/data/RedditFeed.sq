@@ -1,0 +1,49 @@
+CREATE TABLE IF NOT EXISTS FeedEntity (
+    subredditName TEXT    NOT NULL,
+    postOrder     INTEGER NOT NULL,
+    postId        TEXT    NOT NULL,
+    PRIMARY KEY (
+        subredditName,
+        postOrder,
+        postId
+    )
+);
+CREATE TABLE IF NOT EXISTS PostEntity (
+    id      TEXT    NOT NULL,
+    text    TEXT,
+    title   TEXT    NOT NULL,
+    url     TEXT    NOT NULL,
+    PRIMARY KEY (
+        id
+    )
+);
+
+CREATE INDEX IF NOT EXISTS index_FeedEntity_postId ON FeedEntity (
+    postId
+);
+
+selectBySubredditName:
+SELECT PostEntity.id,
+       PostEntity.title,
+       PostEntity.text,
+       PostEntity.url
+  FROM PostEntity
+       LEFT JOIN
+       FeedEntity ON PostEntity.id = FeedEntity.postId
+ WHERE subredditName = :subredditName
+ ORDER BY FeedEntity.postOrder ASC;
+
+insertFeed:
+INSERT OR REPLACE INTO FeedEntity (subredditName,postOrder,postId) VALUES (?,?,?);
+
+insertPost:
+INSERT OR REPLACE INTO PostEntity (id,title,text,url) VALUES (?,?,?,?);
+
+deleteObsoletePosts:
+DELETE FROM PostEntity WHERE id NOT IN (SELECT DISTINCT(postId) FROM FeedEntity);
+
+deleteFeedBySubredditName:
+DELETE FROM FeedEntity WHERE subredditName = ?;
+
+deleteAllFeeds:
+DELETE FROM FeedEntity;

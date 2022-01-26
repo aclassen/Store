@@ -1,0 +1,7 @@
+/.idea
+/Pods
+/.build
+xcuserdata/
+*.ipa
+*.dSYM.zip
+*.dSYM
