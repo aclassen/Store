@@ -1,4 +1,6 @@
-# Store 4
+# Store 4 - KMP
+## ⚠️Work in progress⚠️ KMP implementation of the Store4 library
+
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.dropbox.mobile.store/store4/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.dropbox.mobile.store/store4/)
 
