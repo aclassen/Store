@@ -1,15 +1,5 @@
 # Store 4 - KMP
-## ⚠️Work in progress⚠️ KMP implementation of the Store4 library
-
-### In case you encounter any "pod install" errors while building the sample app and you already checked what Android Studio suggest , run once:
-
-```groovy
- ./gradlew :shared:podInstall
- ```
-
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.dropbox.mobile.store/store4/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.dropbox.mobile.store/store4/)
-
-[![codecov](https://codecov.io/gh/dropbox/Store/branch/master/graph/badge.svg)](https://codecov.io/gh/dropbox/Store)
+## Store4 KMP port
 
 Store is a Kotlin library for loading data from remote and local sources.
 
@@ -31,20 +21,16 @@ Store leverages multiple request throttling to prevent excessive calls to the ne
 
 ### How to include in your project
 
-Artifacts are hosted on **Maven Central**.
-
 ###### Latest version:
 
 ```groovy
-def store_version = "4.0.1"
-//if using kotlin 1.5 (https://github.com/dropbox/Store/issues/263)
-def store_version = "4.0.4-KT15"
+def store_version = "0.0.1"
 ```
 
 ###### Add the dependency to your `build.gradle`:
 
 ```groovy
-implementation "com.dropbox.mobile.store:store4:${store_version}"
+implementation "org.burnoutcrew.store:store4-kmp:${store_version}"
 ```
 
 ###### Set the source & target compatibilities to `1.8`

@@ -1,6 +1,6 @@
 Cache-KMP
 ===================
-## ⚠️Work in progress⚠ KMP implementation of the Cache library
+## Cache KMP port
 
 Store depends on a subset of Guava, we have extracted these parts into a shaded Cache artifact.  
 Feel free to use Cache anytime you need an in memory cache implementation optimized for Android.
@@ -9,27 +9,18 @@ Feel free to use Cache anytime you need an in memory cache implementation optimi
 To use, first build a cache instance.
 
 ```java
- memCache = CacheBuilder.newBuilder()
-                .maximumSize(getCacheSize())
-                .expireAfterAccess(getCacheTTL(), TimeUnit.SECONDS)
-                .build();
+val cache = cacheBuilder<String, String> {
+        maximumSize(20)
+        expireAfterAccess(5.minutes)
+        }
 ```
 
-You can then use your cache as regular cache or one that knows how to load itself (with blocking) when empty
-```java 
-memCache.get(key, new Callable<T>() {
-                @Override
-                public Observable<T> call() throws Exception {
-                    return getCachedValue(key);
-                }
-            });
- ```
 
 Please refer to Guava's Cache documentation for additional features/configurations
 https://github.com/google/guava/wiki/CachesExplained
 
 ```groovy
-	implementation "com.dropbox.mobile.store:store4:${store_version}"
+	implementation "org.burnoutcrew.store:store4-kmp:${store_version}"
 ```
 Please refer to the [Store Readme](https://github.com/dropbox/Store/blob/main/README.md#latest-version) for the latest version.
 

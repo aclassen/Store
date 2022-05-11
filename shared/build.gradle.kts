@@ -1,3 +1,4 @@
+import  org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
@@ -10,13 +11,9 @@ version = "1.0"
 kotlin {
     android()
     jvm()
-    val iosTarget: (String, org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget.() -> Unit) -> org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget =
-        if (System.getenv("SDK_NAME")?.startsWith("iphoneos") == true)
-            ::iosArm64
-        else
-            ::iosX64
-
-    iosTarget("ios") {}
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
 
     cocoapods {
         summary = "Some description for the Shared Module"
@@ -36,9 +33,10 @@ kotlin {
                 implementation(libs.sqldelight.coroutines)
                 implementation(libs.ktor.client.core)
                 implementation(libs.ktor.serialization.core)
+                implementation(libs.ktor.contentnegotiation)
                 implementation(libs.serialization.json)
-                implementation(project(":store"))
-                implementation(project(":filesystem"))
+                implementation(project(":store-kmp"))
+                implementation(project(":filesystem-kmp"))
 
             }
         }
@@ -62,19 +60,25 @@ kotlin {
                 implementation(kotlin("test-junit"))
             }
         }
-        val iosMain by getting {
+        val iosX64Main by getting
+        val iosArm64Main by getting
+        val iosSimulatorArm64Main by getting
+        val iosMain by creating {
+            dependsOn(commonMain)
+            iosX64Main.dependsOn(this)
+            iosArm64Main.dependsOn(this)
+            iosSimulatorArm64Main.dependsOn(this)
             dependencies {
                 implementation(libs.sqldelight.driver.native)
                 implementation(libs.ktor.client.ios)
             }
         }
-        val iosTest by getting
         val jvmMain by getting {
             dependencies {
                 implementation(libs.sqldelight.driver.jvm)
                 implementation(libs.ktor.client.core)
                 implementation(libs.ktor.client.jvm)
-                implementation(libs.ktor.serialization.jvm)
+
                 implementation(libs.serialization.json)
             }
         }

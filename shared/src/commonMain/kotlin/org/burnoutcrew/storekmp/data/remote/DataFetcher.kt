@@ -17,18 +17,18 @@
 package org.burnoutcrew.storekmp.data.remote
 
 import io.ktor.client.*
-import io.ktor.client.features.json.JsonFeature
-import io.ktor.client.features.json.serializer.*
+import io.ktor.client.call.*
+import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.request.*
 import io.ktor.http.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
-
+import io.ktor.serialization.kotlinx.json.*
 internal class DataFetcher {
     private val client = HttpClient {
-        install(JsonFeature) {
-            serializer = KotlinxSerializer(Json {
+        install(ContentNegotiation) {
+            json(Json {
                 ignoreUnknownKeys = true
             })
         }
@@ -40,7 +40,7 @@ internal class DataFetcher {
             client.request("$BASE_URL/r/$subreditName/new$JSON_ENCODING") {
                 method = HttpMethod.Get
             }
-        }
+        }.body()
     }
 
     @Throws(Exception::class)
@@ -49,7 +49,7 @@ internal class DataFetcher {
             client.request("$BASE_URL/best$JSON_ENCODING") {
                 method = HttpMethod.Get
             }
-        }
+        }.body()
     }
 
     companion object {
