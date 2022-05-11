@@ -20,7 +20,7 @@ Please refer to Guava's Cache documentation for additional features/configuratio
 https://github.com/google/guava/wiki/CachesExplained
 
 ```groovy
-	implementation "org.burnoutcrew.store:store4-kmp:${store_version}"
+	implementation "org.burnoutcrew.store:cache-kmp:${store_version}"
 ```
 Please refer to the [Store Readme](https://github.com/dropbox/Store/blob/main/README.md#latest-version) for the latest version.
 
