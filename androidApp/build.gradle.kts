@@ -24,6 +24,7 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.2.0-alpha08"
     }
+    namespace = "org.burnoutcrew.storekmp.android"
 }
 
 dependencies {

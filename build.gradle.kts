@@ -6,7 +6,7 @@ buildscript {
     }
     dependencies {
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.20")
-        classpath("com.android.tools.build:gradle:7.1.3")
+        classpath("com.android.tools.build:gradle:7.2.0")
         classpath ("org.jetbrains.kotlinx:atomicfu-gradle-plugin:0.17.0")
         classpath ("com.squareup.sqldelight:gradle-plugin:1.5.3")
     }

@@ -1,4 +1,3 @@
-import  org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
@@ -92,6 +91,7 @@ android {
         minSdk = 21
         targetSdk = 31
     }
+    namespace = "org.burnoutcrew.storekmp"
 }
 
 sqldelight {
