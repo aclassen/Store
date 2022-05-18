@@ -218,14 +218,14 @@ StoreBuilder
             deleteAll = db.postDao()::clearAllFeeds
         )
     ).cachePolicy(
-        MemoryPolicy.builder()
-            .setMemorySize(10)
+        MemoryPolicy.builder<Any, Any>()
+            .setMaxSize(10)
             .setExpireAfterAccess(10.minutes) // or setExpireAfterWrite(10.minutes)
             .build()
     ).build()
 ```
 
-* `setMemorySize(maxSize: Long)` sets the maximum number of entries to be kept in the cache before starting to evict the least recently used items.
+* `setMaxSize(maxSize: Long)` sets the maximum number of entries to be kept in the cache before starting to evict the least recently used items.
 * `setExpireAfterAccess(expireAfterAccess: Duration)` sets the maximum time an entry can live in the cache since the last access, where "access" means reading the cache, adding a new cache entry, and replacing an existing entry with a new one. This duration is also known as **time-to-idle (TTI)**.
 * `setExpireAfterWrite(expireAfterWrite: Duration)` sets the maximum time an entry can live in the cache since the last write, where "write" means adding a new cache entry and replacing an existing entry with a new one. This duration is also known as **time-to-live (TTL)**.
 
@@ -285,3 +285,19 @@ The following will clear all entries from both the in-memory cache and the sourc
 ```kotlin
 store.clearAll()
 ```
+
+## License
+
+    Copyright (c) 2021 Dropbox, Inc.
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
